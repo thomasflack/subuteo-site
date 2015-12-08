@@ -1,12 +1,12 @@
 <?php
 
-class DB {
+class testDb {
     private $servername;
     private $username;
     private $password;
     private $dbName;
 
-    public function DB ($servername. $username, $password, $dbName)
+    public function testDb ($servername, $username, $password, $dbName)
     {
         if (!is_string($servername)) {
             error_log(
@@ -69,7 +69,7 @@ class DB {
         $dbConn = new mysqli($this->servername, $this->username, $this->password, $this->dbName);
 
         if ($dbConn->connect_error) {
-            die(sprintf('Connection failed: %s', $dbConn->connect_error);
+            die(sprintf('Connection failed: %s', $dbConn->connect_error));
         }
 
         $result = $dbConn->query($query);

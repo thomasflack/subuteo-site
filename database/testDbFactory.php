@@ -1,7 +1,9 @@
 <?php
+include ('testDb.php');
 
-class DB_Test{
-    private function create()
+class testDbFactory{
+    public function create()
     {
-        return new DB('localhost', 'root', '', 'test2');
+        return new mysqli('localhost', 'root', '', 'test');
     }
+}
