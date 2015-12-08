@@ -4,8 +4,9 @@ class DB {
     private $servername;
     private $username;
     private $password;
+    private $dbName;
 
-    public function DB ($servername. $username, $password)
+    public function DB ($servername. $username, $password, $dbName)
     {
         if (!is_string($servername)) {
             error_log(
@@ -37,9 +38,20 @@ class DB {
             return;
         }
 
+        if (!is_string($dbName)) {
+            error_log(
+                sprintf(
+                    '%s:%s - DB Name %s is not a string.',
+                    __FILE__, __LINE__, var_export($dbName, true)
+                )
+            );
+            return;
+        }
+
         $this->servername = $servername;
         $this->username   = $username;
         $this->password   = $password;
+        $this->dbName     = $dbName;
     }
 
     public function query ($query)
@@ -54,7 +66,7 @@ class DB {
             return;
         }
 
-        $dbConn = new mysqli($this->servername, $this->username, $this->password);
+        $dbConn = new mysqli($this->servername, $this->username, $this->password, $this->dbName);
 
         if ($dbConn->connect_error) {
             die(sprintf('Connection failed: %s', $dbConn->connect_error);
@@ -64,7 +76,7 @@ class DB {
 
         $dbConn->close();
 
-        return result;
+        return $result;
     }
 }
 

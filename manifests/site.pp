@@ -51,6 +51,12 @@ file { '/var/www':
     force => true,
 }
 
+file { '/var/database':
+    ensure => link,
+    target => '/vagrant/database',
+    force => true,
+}
+
 package {'mysql-server':
     require => Exec['apt-get update'],
     ensure => installed,
